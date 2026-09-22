@@ -1,0 +1,13 @@
+#spring.application.name=jgames
+spring:
+  application:
+    name: jgames
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+logging:
+  level:
+    root: debug    

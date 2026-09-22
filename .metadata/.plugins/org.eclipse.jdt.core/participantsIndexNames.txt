@@ -1,0 +1,11 @@
+INDEX VERSION 1.134
+C:\dev_program\sts_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2503643558.index
+\hello-spring\src\main\java
+C:\dev_program\sts_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1480588753.index
+\hello-boot\src\main\java
+C:\dev_program\sts_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3195915820.index
+\hello-boot\src\main\java
+C:\dev_program\sts_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2064963670.index
+\jgames\src\main\java
+C:\dev_program\sts_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3056652587.index
+\hello-boot\src\main\java

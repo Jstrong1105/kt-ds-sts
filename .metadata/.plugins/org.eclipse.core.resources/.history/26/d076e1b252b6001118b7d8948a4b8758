@@ -1,0 +1,58 @@
+package com.jgames.demo.minesweeper.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import com.jgames.demo.controller.HelloController;
+import com.jgames.demo.minesweeper.domain.Board;
+import com.jgames.demo.minesweeper.service.MinesweeperService;
+import com.jgames.demo.minesweeper.vo.request.FlagRequest;
+import com.jgames.demo.minesweeper.vo.request.MinesweeperRequest;
+import com.jgames.demo.minesweeper.vo.response.MinesweeperResponse;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class MinesweeperController {
+
+	
+	private final MinesweeperService service;
+	
+	public MinesweeperController(MinesweeperService service) {
+		this.service = service;
+	}
+	
+	@GetMapping("/minesweeper")
+	public String toMinesweeper() {
+		return "minesweeper";
+	}
+	
+	@PostMapping("/minesweeper/reset")
+	@ResponseBody
+	public boolean reset(HttpSession session, @RequestBody String level) {
+		this.service.reset(session);
+		return true;
+	}
+	
+	@PostMapping("/minesweeper/open")
+	@ResponseBody
+	public MinesweeperResponse openCell(@RequestBody MinesweeperRequest request
+			                          , @SessionAttribute("minesweeper") Board board) {
+		
+		
+		return service.openCell(request, board);
+	}
+	
+	@PostMapping("/minesweeper/flag")
+	@ResponseBody
+	public boolean toggleFlag(@RequestBody FlagRequest request
+			                , @SessionAttribute("minesweeper") Board board) {
+		
+		service.toggleFlag(request, board);
+		
+		return true;
+	}
+}

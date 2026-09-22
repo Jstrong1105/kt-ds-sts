@@ -1,0 +1,10 @@
+package com.jgames.demo.minesweeper.service;
+
+import jakarta.servlet.http.HttpSession;
+
+public interface MinesweeperBoard {
+	
+	void reset(HttpSession session);
+	
+	
+}

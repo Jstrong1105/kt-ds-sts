@@ -1,0 +1,9 @@
+package com.jgames.demo.minesweeper.vo.response;
+
+import java.util.List;
+
+import com.jgames.demo.minesweeper.domain.Cell;
+
+public record MinesweeperResponse(ResultType result, List<OpenCell> openCells, List<Integer> mines) {
+
+}

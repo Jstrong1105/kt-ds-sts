@@ -1,0 +1,5 @@
+package com.jgames.demo.minesweeper.domain;
+
+public record CellPosition() {
+
+}

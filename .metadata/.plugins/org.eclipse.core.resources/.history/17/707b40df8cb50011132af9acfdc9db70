@@ -1,0 +1,9 @@
+package com.ktdsuniversity.edu.members.vo.response;
+
+import java.util.List;
+
+public class MembersListVO {
+	
+	private long count;
+	private List<MembersVO> members;
+}

@@ -1,0 +1,8 @@
+package com.jgames.demo.minesweeper.vo.request;
+
+public class MinesweeperRequest {
+	
+	private int position;
+	
+	private ClickEvent event;
+}

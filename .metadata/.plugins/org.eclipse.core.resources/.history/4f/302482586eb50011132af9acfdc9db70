@@ -1,0 +1,10 @@
+// alert("hello");
+document.addEventListener("click", function (evt) {
+  const t = evt.target;
+
+  // console.log(t);
+  // console.dir(t);
+  if (t.closest(".cell")) {
+    alert("cell");
+  }
+});

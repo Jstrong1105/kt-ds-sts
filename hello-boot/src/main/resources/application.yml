@@ -1,0 +1,9 @@
+#spring.application.name=hello-boot
+spring:
+  application:
+    name: hello-boot
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

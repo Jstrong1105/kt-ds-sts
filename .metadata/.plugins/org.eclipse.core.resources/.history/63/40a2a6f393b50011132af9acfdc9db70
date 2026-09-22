@@ -1,0 +1,28 @@
+onload = function () {
+  // alert("hello world");
+
+  const path = document.querySelector("body").dataset["contextPath"];
+  // console.log(path);
+
+  openCell(3, path);
+};
+
+async function openCell(position, path) {
+  const cell = document.querySelector(`[data-position="${position}"]`);
+
+  const option = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      position: position,
+      action: "OPEN",
+    }),
+  };
+
+  const fetchResult = await fetch(`${path}/minesweeper/open`, option);
+  // console.log(fetchResult);
+  const result = await fetchResult.json();
+  console.log(result);
+}

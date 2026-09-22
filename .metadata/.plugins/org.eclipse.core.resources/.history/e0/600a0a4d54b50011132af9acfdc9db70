@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>J-Games</title>
+    <link rel="stylesheet" type="text/css" src=""></link>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="top-bar">
+        <div class="top-left"></div>
+
+        <div class="top-right"></div>
+      </div>
+
+      <div class="side-bar">
+        <template id="side-item-template">
+          <div class="side-item">
+            <img src="" alt="" class="side-icon" />
+            <span>사이드 기능</span>
+          </div>
+        </template>
+      </div>
+
+      <div class="content">
+        <div class="board">
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+        </div>
+      </div>
+
+      <div class="footer">© 2026. J-Games. All rights reserved.</div>
+    </div>
+  </body>
+</html>

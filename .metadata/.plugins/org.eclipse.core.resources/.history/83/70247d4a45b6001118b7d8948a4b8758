@@ -1,0 +1,8 @@
+package com.ktdsuniversity.edu.articles.vo.request;
+
+/**
+ * 게시글 수정을 위한 데이터
+ */
+public class ModifyArticleVO {
+
+}

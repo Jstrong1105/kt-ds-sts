@@ -1,0 +1,20 @@
+package com.jgames.demo.minesweeper.vo.request;
+
+public class MinesweeperRequest {
+	
+	private Integer position;
+	private CellAction action;
+	
+	public Integer getPosition() {
+		return this.position;
+	}
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
+	public CellAction getEvent() {
+		return this.action;
+	}
+	public void setEvent(CellAction event) {
+		this.action = event;
+	}	
+}

@@ -1,0 +1,16 @@
+package com.jgames.demo.minesweeper.service;
+
+import com.jgames.demo.minesweeper.domain.Board;
+import com.jgames.demo.minesweeper.vo.request.MinesweeperRequest;
+import com.jgames.demo.minesweeper.vo.response.MinesweeperResponse;
+
+import jakarta.servlet.http.HttpSession;
+
+public interface MinesweeperService {
+	
+	void reset(HttpSession session);
+	
+	MinesweeperResponse openCell(MinesweeperRequest request, Board board);
+	
+	boolean toggleFlag(MinesweeperRequest request, Board board); 
+}

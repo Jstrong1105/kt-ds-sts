@@ -1,0 +1,13 @@
+package com.jgames.demo.minesweeper.vo.response;
+
+import java.util.List;
+
+import com.jgames.demo.minesweeper.domain.Cell;
+
+public class MinesweeperResponse {
+	
+	private ResultType result;
+	
+	private List<Cell> cells;
+	
+}

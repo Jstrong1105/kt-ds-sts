@@ -1,0 +1,61 @@
+package com.jgames.demo.minesweeper.domain;
+
+public class Cell {
+	private CellStatus status;
+	private int adjacentMines;
+	private boolean mine;
+	 
+	Cell() {
+		this.status = CellStatus.CLOSE;
+		this.mine = false;
+		this.adjacentMines = 0;
+	}
+	
+	int getAdjacentMines() {
+		return this.adjacentMines;
+	}
+	
+	void incrementAdjacentMines() {
+		this.adjacentMines++;
+	}
+	
+	void decrementAdjacentMines() {
+		this.adjacentMines--;
+	}
+	
+	boolean isMine() {
+		return this.mine;
+	}
+	
+	void flipMine() {
+		this.mine = !mine;
+	}
+	
+	boolean isClose() {
+		return this.status == CellStatus.CLOSE;
+	}
+	
+	boolean isOpen() {
+		return this.status == CellStatus.OPEN;
+	}
+	
+	boolean isFlag() {
+		return this.status == CellStatus.FLAG;
+	}
+	
+	boolean isReveal() {
+		return this.status == CellStatus.REVEAL;
+	}
+	
+	void openCell() {
+		this.status = this.status.openCell();
+	}
+	
+	void toggleFlag() {
+		
+	}
+	
+	void revealMine() {
+		
+	}
+}

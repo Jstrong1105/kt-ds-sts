@@ -1,0 +1,30 @@
+package com.jgames.demo.minesweeper.vo.request;
+
+public enum Level {
+	EASY(5,5,5),
+	NORMAL(6,8,10),
+	HARD(10,10,20)
+	;
+	
+	private final int row;
+	private final int col;
+	private final int mineCount;
+	
+	Level(int row, int col, int mineCount){
+		this.row = row;
+		this.col = col;
+		this.mineCount = mineCount;
+	}
+	
+	public int getRow() {
+		return this.row;
+	}
+	
+	public int getCol() {
+		return this.col;
+	}
+	
+	public int getMineCount() {
+		return this.mineCount;
+	}
+}

@@ -1,0 +1,6 @@
+package com.jgames.demo.minesweeper.vo.request;
+
+public enum CellAction {
+	LEFT,
+	RIGHT
+}

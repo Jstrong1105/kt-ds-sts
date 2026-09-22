@@ -1,0 +1,187 @@
+const path = document.querySelector("body").dataset["contextPath"];
+// console.log(path);
+// openCell(3, path);
+
+document.addEventListener("contextmenu", function (evt) {
+  // alert("우클릭");
+  evt.preventDefault();
+
+  const target = evt.target;
+
+  if (target.closest(".close-cell")) {
+    // alert("깃발 설치");
+    const cell = target.closest(".close-cell");
+    const row = cell.dataset.row;
+    const col = cell.dataset.col;
+    toggleFlag(row, col, false);
+  }
+
+  if (target.closest(".flag-cell")) {
+    // alert("깃발 회수");
+    const row = target.closest(".flag-cell").dataset.row;
+    const col = target.closest(".flag-cell").dataset.col;
+    toggleFlag(row, col, true);
+  }
+});
+
+async function toggleFlag(row, col, flag) {
+  const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+
+  const fet = await fetch(`${path}/minesweeper/flag`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      row: Number(row),
+      col: Number(col),
+      flag: flag,
+    }),
+  });
+
+  if (flag) {
+    cell.classList.remove("flag-cell");
+    cell.classList.add("close-cell");
+    cell.innerHTML = "";
+  } else {
+    cell.classList.remove("close-cell");
+    cell.classList.add("flag-cell");
+
+    const img = document.createElement("img");
+    img.setAttribute("src", `${path}/img/flag_icon.svg`);
+    cell.append(img);
+  }
+}
+
+document.addEventListener("click", function (evt) {
+  const target = evt.target;
+
+  if (target.closest(".close-cell")) {
+    // alert("open_cell");
+
+    const t = target.closest(".close-cell");
+
+    const row = t.dataset.row;
+    const col = t.dataset.col;
+    // alert(pos);
+
+    openCell(row, col);
+  }
+
+  if (target.closest(".reset")) {
+    reset(target.closest(".reset"));
+  }
+});
+
+async function openCell(row, col) {
+  const option = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      row: Number(row),
+      col: Number(col),
+    }),
+  };
+
+  const fetchResult = await fetch(`${path}/minesweeper/open`, option);
+  // console.log(fetchResult);
+  const result = await fetchResult.json();
+  // console.log(result);
+
+  if (result.result == "OPEN") {
+    openCells(result.openCells, path);
+  } else if (result.result == "EXPLODED") {
+    revealMines(result.mines, path);
+    alert("지뢰!");
+  } else if (result.result == "CLEAR") {
+    clear(result, path);
+  } else {
+    alert("열 수 없음");
+  }
+}
+
+async function reset(btn) {
+
+  const level = btn.dataset.level;
+
+  const fet = await fetch(`${path}/minesweeper/reset`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: {
+      JSON.stringify({
+        "level": level
+      })
+    }
+  });
+
+  // console.log(fet);
+
+  const result = await fet.json();
+  const rowCount = result.row;
+  const colCount = result.col;
+
+  const board = document.querySelector(".board");
+  board.innerHTML = "";
+
+  for (let row = 0; row < rowCount; row++) {
+    for (let col = 0; col < colCount; col++) {
+      const divDom = document.createElement("div");
+      divDom.classList.add("close-cell");
+      divDom.dataset.row = row;
+      divDom.dataset.col = col;
+
+      board.append(divDom);
+    }
+  }
+}
+// const cell = document.querySelector(
+//   `[data-position-row="${row}"][data-position-col="${col}"]`,
+// );
+function openCells(cells) {
+  cells.forEach((eachCell) => {
+    const cell = document.querySelector(
+      `[data-row="${eachCell.row}"][data-col="${eachCell.col}"]`,
+    );
+
+    cell.classList.remove("close-cell");
+    cell.classList.add("open-cell");
+    cell.dataset.adjacent = eachCell.adjacentMines;
+
+    const adjacentMines = eachCell.adjacentMines;
+
+    // alert(adjacentMines);
+
+    if (adjacentMines != 0) {
+      const img = document.createElement("img");
+      img.setAttribute("src", `${path}/img/number_${adjacentMines}_icon.svg`);
+      cell.append(img);
+    }
+  });
+}
+
+function revealMines(mines) {
+  mines.forEach((eachMine) => {
+    const cell = document.querySelector(
+      `[data-row="${eachMine.row}"][data-col="${eachMine.col}"]`,
+    );
+    cell.classList.remove("close-cell");
+    cell.classList.remove("flag-cell");
+    cell.classList.add("reveal-cell");
+
+    const img = document.createElement("img");
+    img.setAttribute("src", `${path}/img/mine_icon.svg`);
+    cell.innerHTML = "";
+    cell.append(img);
+  });
+}
+
+function clear(result) {
+  openCells(result.openCells);
+  revealMines(result.mines);
+  alert("클리어!");
+}
+

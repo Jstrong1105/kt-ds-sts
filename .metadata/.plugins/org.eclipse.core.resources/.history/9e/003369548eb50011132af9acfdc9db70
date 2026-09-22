@@ -1,0 +1,33 @@
+package com.ktdsuniversity.edu.members.web;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ktdsuniversity.edu.members.service.MembersService;
+import com.ktdsuniversity.edu.members.vo.response.MembersListVO;
+import com.ktdsuniversity.edu.members.vo.response.MembersVO;
+
+@Controller
+public class MembersController {
+	
+	public MembersController(MembersService membersService) {
+		this.membersService = membersService;
+	}
+	
+	private MembersService membersService;
+	
+	@GetMapping("/members")
+	@ResponseBody
+	public MembersListVO getMembers() {
+		
+		MembersListVO membersList = new MembersListVO();
+		
+		long count = this.membersService.getCount();
+		List<MembersVO> membersList = this.membersService.getMembers();
+		
+		return null;
+	}
+}

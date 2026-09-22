@@ -1,0 +1,7 @@
+package com.jgames.demo.minesweeper.domain;
+
+public class Cell {
+	 private CellStatus status;
+	 private int adjacentMines;
+	 private boolean mine;
+}

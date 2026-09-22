@@ -1,0 +1,8 @@
+#spring.application.name=hello-spring
+spring:
+  application:
+    name: hello-spring
+
+text:
+  name:
+    template: 1234    

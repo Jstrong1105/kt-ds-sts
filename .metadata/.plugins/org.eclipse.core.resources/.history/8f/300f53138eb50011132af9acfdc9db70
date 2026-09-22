@@ -1,0 +1,20 @@
+package com.ktdsuniversity.edu.members.service;
+
+import java.util.List;
+
+import com.ktdsuniversity.edu.members.vo.response.MembersVO;
+
+public class MembersServiceImpl implements MembersService {
+	
+	@Override
+	public long getCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public List<MembersVO> getMembers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

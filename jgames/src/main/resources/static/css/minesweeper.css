@@ -1,0 +1,96 @@
+:root {
+  --body-background-color: #333;
+  --wrapper-background-color: #6b6b6b;
+  --close-cell-color: #a5a5a5;
+  --open-cell-color: #303030;
+  --reveal-cell-color: #804242;
+  --hover-cell-color: #5f4d4d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--body-background-color);
+}
+
+.wrapper {
+  width: 700px;
+  height: 700px;
+
+  margin: 0 auto;
+  margin-top: 100px;
+
+  background-color: var(--wrapper-background-color);
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  padding: 1rem;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+
+  & > .reset {
+    cursor: pointer;
+    border: 0;
+    width: 100px;
+    height: 50px;
+
+    &:hover {
+      background-color: var(--hover-cell-color);
+    }
+  }
+}
+
+.board {
+  height: 500px;
+  width: 500px;
+
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 0.12rem;
+
+  & > div {
+    border: 1px solid var(--body-background-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      width: 50%;
+      height: 50%;
+    }
+  }
+}
+
+.close-cell,
+.flag-cell {
+  background-color: var(--close-cell-color);
+}
+
+.reveal-cell {
+  background-color: var(--reveal-cell-color);
+}
+
+.close-cell:hover,
+.flag-cell:hover {
+  background-color: var(--hover-cell-color);
+  cursor: pointer;
+}
+
+.open-cell {
+  background-color: var(--open-cell-color);
+}

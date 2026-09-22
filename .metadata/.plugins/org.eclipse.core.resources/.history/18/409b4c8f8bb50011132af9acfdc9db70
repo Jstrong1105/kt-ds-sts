@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-members
+
+mybatis:
+  config-location: classpath:/config/mybatis-config.xml

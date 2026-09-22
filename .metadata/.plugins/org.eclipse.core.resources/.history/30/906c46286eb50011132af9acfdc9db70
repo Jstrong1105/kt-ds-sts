@@ -1,0 +1,7 @@
+alert("hello");
+document.addEventLisner("click", function (evt) {
+  const t = evt.target;
+
+  console.log(t);
+  console.dir(t);
+});

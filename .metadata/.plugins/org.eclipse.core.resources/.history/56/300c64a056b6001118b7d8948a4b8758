@@ -1,0 +1,17 @@
+package com.ktdsuniversity.edu.commons.util;
+
+import lombok.Data;
+
+@Data
+public class ApiResponse<T> {
+
+	private int httpStatusCode;
+	private String httpStatusMessage;
+	private T body;
+	
+	private String error;
+	
+	public static T ApiResponse<T> OK(T t){
+		
+	}
+}

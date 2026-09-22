@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: articles
+
+# Database 설정
