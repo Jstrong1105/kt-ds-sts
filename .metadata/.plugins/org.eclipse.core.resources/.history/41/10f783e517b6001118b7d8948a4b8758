@@ -1,5 +1,0 @@
-package com.jgames.demo.minesweeper.vo.response;
-
-public record MineCell(int row, int col) {
-
-}

@@ -1,0 +1,20 @@
+package com.ktdsuniversity.edu.files.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.ktdsuniversity.edu.files.service.FilesService;
+
+import lombok.AllArgsConstructor;
+
+@Controller
+@AllArgsConstructor
+public class FilesController {
+	
+	private FilesService filesService;
+	
+	@GetMapping("/filesets/{fileSetId}/files/download/{fileId}")
+	public void downloadFile(@PathVariable String fileSetId
+			               , @PathVariable String fileId)
+}

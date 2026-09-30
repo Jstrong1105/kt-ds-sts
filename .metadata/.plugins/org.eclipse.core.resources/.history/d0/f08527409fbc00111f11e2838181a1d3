@@ -1,0 +1,12 @@
+package com.ktdsuniversity.edu.files.service;
+
+import com.ktdsuniversity.edu.files.vo.response.FilesVO;
+
+public class FilesServiceImpl implements FilesService {
+
+	@Override
+	public FilesVO readAttachFile(String fileSetId, String fileId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

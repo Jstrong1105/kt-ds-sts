@@ -1,7 +1,0 @@
-package com.jgames.demo.minesweeper.domain;
-
-public enum CellStatus {
-	CLOSED,
-	OPEN,
-	FLAG
-}

@@ -1,0 +1,25 @@
+package com.ktdsuniversity.edu.replies.dao;
+
+public interface RepliesDao {
+	
+	long selectReplieCount(String articleId);
+}
+
+/*
+ * long selectArticlesCount();
+ * 
+ * List<ArticlesVO> selectAllArticles();
+ * 
+ * int insertNewArticle(RegistArticleVO registArticleVO);
+ * 
+ * ArticlesVO selectArticleByArticleId(String articleId);
+ * 
+ * int updateArticle(@Param("articleId") String articleId
+ * , @Param("modifyArticleVO") ModifyArticleVO modifyArticleVO);
+ * 
+ * int deleteArticle(@Param("articleId") String articleId);
+ * 
+ * int updateIncreaseViewCount(@Param("articleId") String articleId);
+ * 
+ * int updateIncreaseRecommendCount(@Param("articleId") String articleId);
+ */

@@ -1,0 +1,11 @@
+package com.ktdsuniversity.edu.files.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.ktdsuniversity.edu.files.vo.request.RequestFileSetVO;
+
+@Mapper
+public interface FilesDao {
+	
+	int insertNewFileSet(RequestFileSetVO requestFileSetVO);
+}

@@ -1,0 +1,14 @@
+package com.ktdsuniversity.edu.files.web;
+
+import org.springframework.stereotype.Controller;
+
+import com.ktdsuniversity.edu.files.service.FilesService;
+
+import lombok.AllArgsConstructor;
+
+@Controller
+@AllArgsConstructor
+public class FilesController {
+	
+	private FilesService filesService;
+}

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ktdsuniversity.edu.replies.dao.RepliesDao">
+
+    <!-- long selectReplieCount(@Param("articleId") String articleId); -->
+    <select id="selectReplieCount" resultType="_long" parameterType="string">
+        SELECT COUNT(ID)
+		  FROM REPLIES
+		 WHERE ARTICLE_ID = #{articleId}
+		   AND DEL_YN = 'N'
+    </select>
+    
+    <!-- List<RepliesVO> selectAllReplies(@Param("articleId") String articleId); -->
+    <select id="selectAllReplies"
+            resultType="com.ktdsuniversity.edu.replies.vo.response.RepliesVO"
+            parameterType="string">
+        SELECT ID
+		     , ARTICLE_ID
+		     , EMAIL
+		     , CONTENT
+		     , RECOMMEND_CNT
+		     , DEL_YN
+		     , CRT_DT
+		     , MDFY_DT
+		     , FILE_SET_ID
+		  FROM REPLIES
+		 WHERE ARTICLE_ID = #{articleId}
+		   AND DEL_YN = 'N'
+    </select>
+    
+    <!-- int insertNewReplie(RegistReplieVO registReplieVO); -->
+    <insert id="insertNewReplie" parameterType="com.ktdsuniversity.edu.replies.vo.request.RegistReplieVO">
+     
+        <selectKey keyProperty="id" order="BEFORE" resultType="string">
+            SELECT 'RP-' || TO_CHAR(SYSDATE, 'YYYYMMDD-') || LPAD(SEQ_REPLIES_PK.NEXTVAL,6,'0')
+              FROM DUAL
+        </selectKey>
+     
+        INSERT INTO REPLIES 
+		( ID
+		, ARTICLE_ID
+		, EMAIL
+		, CONTENT
+		, CRT_DT
+		, MDFY_DT
+		, FILE_SET_ID
+		) VALUES 
+		( #{id}
+		, #{articleId}
+		, #{email}
+		, #{content}
+		, SYSDATE
+		, NULL 
+		, #{fileSetId}
+		)
+    
+    </insert>
+    
+    <resultMap type="com.ktdsuniversity.edu.replies.vo.response.RepliesVO" 
+               id="ReplieVOMap"
+               autoMapping="true">
+        <id property="id" column="ID"/>
+        
+        <association property="fileSetVO"
+                     autoMapping="true">
+            <id property="id" column="FILE_SET_ID"/>
+            <result property="email" column="FILE_SET_EMAIL"/>
+            <result property="crtDt" column="FILE_SET_CRT_DT"/>
+            <result property="mdfyDt" column="FILE_SET_MDFY_DT"/>
+            
+            <collection property="files" 
+                        autoMapping="true"
+                        javaType="list">
+                <id property="id" column="FILE_ID"/>
+            </collection>
+            
+        </association>
+        
+    </resultMap>
+    
+    <!-- RepliesVO selectReplieByReplieId(@Param("replieId") String replieId); -->
+    <select id="selectReplieByReplieId" 
+            resultMap="ReplieVOMap"
+            parameterType="string">
+        SELECT R.ID
+		     , R.ARTICLE_ID
+		     , R.EMAIL
+		     , R.CONTENT
+		     , R.RECOMMEND_CNT
+		     , R.DEL_YN
+		     , R.CRT_DT
+		     , R.MDFY_DT
+		     , R.FILE_SET_ID
+		     , FS.ID AS FILE_SET_ID
+		     , FS.EMAIL AS FILE_SET_EMAIL
+		     , FS.CRT_DT AS FILE_SET_CRT_DT
+		     , FS.MDFY_DT AS FILE_SET_MDFY_DT
+		     , F.ID AS FILE_ID
+		     , F.DISPLAY_FILE_NAME 
+		     , F.OBFUSCATE_FILE_NAME 
+		     , F.FILE_SIZE 
+		     , F.DOWNLOAD_COUNT 
+		     , F.DEL_YN 
+		  FROM FILE_SET FS
+		 INNER JOIN FILES F
+		    ON FS.ID = F.FILE_SET_ID 
+		 RIGHT OUTER JOIN REPLIES R
+		    ON R.FILE_SET_ID = FS.ID
+		 WHERE F.ID = #{replieId} 
+    </select>
+    
+    <!-- int updateReplie(ModifyReplieVO modifyReplieVO); -->
+    
+    <!-- int deleteReplie(@Param("replieId") String replieId); -->
+    
+    <!-- int updateIncreaseRecommendCount(@Param("replieId") String replieId); -->
+</mapper>

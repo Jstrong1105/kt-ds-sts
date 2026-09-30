@@ -1,0 +1,11 @@
+package com.ktdsuniversity.edu.files.web;
+
+import com.ktdsuniversity.edu.files.service.FilesService;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class FilesController {
+	
+	private FilesService filesService;
+}

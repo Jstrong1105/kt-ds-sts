@@ -1,0 +1,19 @@
+package com.ktdsuniversity.edu.replies.service;
+
+import com.ktdsuniversity.edu.replies.vo.request.ModifyReplieVO;
+import com.ktdsuniversity.edu.replies.vo.request.RegistReplieVO;
+import com.ktdsuniversity.edu.replies.vo.response.ReplieListVO;
+import com.ktdsuniversity.edu.replies.vo.response.RepliesVO;
+
+public interface RepliesService {
+	
+	ReplieListVO readAllReplies(String articleId);
+	
+	RepliesVO createNewReplie(RegistReplieVO registReplieVO);
+	
+	RepliesVO updateReplie(String replieId, ModifyReplieVO modifyReplieVO);
+	
+	String deleteReplie(String replieId);
+	
+	long recommendOneReplie(String replieId);
+}

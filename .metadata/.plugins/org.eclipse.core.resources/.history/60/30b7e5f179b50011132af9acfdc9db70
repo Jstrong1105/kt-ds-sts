@@ -1,7 +1,0 @@
-package com.jgames.demo.minesweeper.vo.response;
-
-public enum ResultType {
-	EXPLODE, // 지뢰
-	BLCOK, // 이미 열린 셀
-	SUCCESS // 성공
-}

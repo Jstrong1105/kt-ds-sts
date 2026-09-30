@@ -1,6 +1,0 @@
-package com.ktdsuniversity.edu.commons.util;
-
-public class ApiResponse {
-
-	private int httpStatusCode;
-}

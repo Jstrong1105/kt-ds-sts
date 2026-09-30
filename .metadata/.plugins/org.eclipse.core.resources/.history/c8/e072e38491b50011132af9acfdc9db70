@@ -1,6 +1,0 @@
-onload = function () {
-  // alert("hello world");
-
-  const path = document.querySelector("body").dataset["context-path"];
-  console.log(path);
-};

@@ -1,6 +1,0 @@
-package com.ktdsuniversity.edu.articles.vo.response;
-
-public class ArticleListVO {
-	
-	private long articleCount;
-}

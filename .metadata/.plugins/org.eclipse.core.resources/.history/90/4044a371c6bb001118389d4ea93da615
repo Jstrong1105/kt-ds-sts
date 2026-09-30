@@ -1,0 +1,10 @@
+package com.ktdsuniversity.edu.files.vo.response;
+
+@Data
+public class FileSetVO {
+	
+	private String id;
+	private String email;
+	private String crtDt;
+	private String mdfyDt;
+}

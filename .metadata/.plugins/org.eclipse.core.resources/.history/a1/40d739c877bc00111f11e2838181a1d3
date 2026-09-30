@@ -1,0 +1,33 @@
+package com.ktdsuniversity.edu.replies.dao;
+
+import java.util.List;
+
+import com.ktdsuniversity.edu.replies.vo.response.RepliesVO;
+
+public interface RepliesDao {
+	
+	long selectReplieCount(String articleId);
+	
+	List<RepliesVO> selectAllReplies(String articleId);
+	
+	int insertNewReplie();
+}
+
+/*
+ * long selectArticlesCount();
+ * 
+ * List<ArticlesVO> selectAllArticles();
+ * 
+ * int insertNewArticle(RegistArticleVO registArticleVO);
+ * 
+ * ArticlesVO selectArticleByArticleId(String articleId);
+ * 
+ * int updateArticle(@Param("articleId") String articleId
+ * , @Param("modifyArticleVO") ModifyArticleVO modifyArticleVO);
+ * 
+ * int deleteArticle(@Param("articleId") String articleId);
+ * 
+ * int updateIncreaseViewCount(@Param("articleId") String articleId);
+ * 
+ * int updateIncreaseRecommendCount(@Param("articleId") String articleId);
+ */

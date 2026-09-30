@@ -1,0 +1,10 @@
+package com.ktdsuniversity.edu.replies.vo.request;
+
+public class RegistReplieVO {
+	
+	private String id;
+	private String articleId;
+	private String email;
+	private String content;
+	private String fileSetId;
+}

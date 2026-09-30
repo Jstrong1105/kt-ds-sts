@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktdsuniversity.edu.articles.service.ArticlesService;
@@ -51,18 +50,28 @@ public class ArticlesController {
 	public ApiResponse<ArticleListVO> getArticles() {
 		
 		// System.out.println(this.articleService);
-		
-		ArticleListVO result = this.articleService.readAllArticles();
-		
-		return ApiResponse.OK(result);
+		try {
+			return ApiResponse.OK(this.articleService.readAllArticles());
+		} catch (Exception e) {
+			return ApiResponse.ERROR(e.getMessage());
+		}
 	}
 	
 	@PostMapping("/articles")
 	@ResponseBody
-	public ApiResponse<ArticlesVO> makeNewArticle(@RequestBody RegistArticleVO registArticleVO) {
+	public ApiResponse<ArticlesVO> makeNewArticle(
+			                       // Command Object
+			                       // 클라이언트가 컨트롤러로 전송한 파라미터(폼파라미터, 쿼리스트링파라미터)를
+			                       // 자동으로 받아오는 역할
+			                       RegistArticleVO registArticleVO
+			                       // 클라이언트가 컨트롤러로 전송한 파라미터(폼파라미터, 쿼리스트링파라미터)를
+			                       // 하나씩 받아오는 역할
+			                       // , @RequestParam List<MultipartFile> file
+			                       ) {
+		
 		try {
 			return ApiResponse.CREATED(this.articleService.createNewArticle(registArticleVO));	
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			return ApiResponse.ERROR(e.getMessage());
 		}
 	}
@@ -70,28 +79,42 @@ public class ArticlesController {
 	@PutMapping("/articles/{articleId}")
 	@ResponseBody
 	public ApiResponse<ArticlesVO> updateArticle(@PathVariable String articleId
-			                      , @RequestBody ModifyArticleVO modifyArticleVO) {
-		return ApiResponse.OK(this.articleService.updateArticle(articleId, modifyArticleVO));
+			                      , ModifyArticleVO modifyArticleVO) {
+		try {
+			return ApiResponse.OK(this.articleService.updateArticle(articleId, modifyArticleVO));
+		} catch (Exception e) {
+			return ApiResponse.ERROR(e.getMessage());
+		}
 	}
 	
 	@DeleteMapping("/articles/{articleId}")
 	@ResponseBody
 	public ApiResponse<String> deleteArticle(@PathVariable String articleId) {
-		String deleteResult = this.articleService.deleteArticle(articleId);
-		return ApiResponse.OK(deleteResult);
+		try {
+			return ApiResponse.OK(this.articleService.deleteArticle(articleId));
+		} catch (Exception e) {
+			return ApiResponse.ERROR(e.getMessage());
+		}
 	}
 	
 	@GetMapping("/articles/{articleId}")
 	@ResponseBody
 	public ApiResponse<ArticlesVO> getOneArticle(@PathVariable String articleId) {
-		return ApiResponse.OK(this.articleService.readOneArticle(articleId));
+		try {
+			return ApiResponse.OK(this.articleService.readOneArticle(articleId));
+		} catch (Exception e) {
+			return ApiResponse.ERROR(e.getMessage());
+		}
 	}
 	
 	@PutMapping("/articles/recommend/{articleId}")
 	@ResponseBody
 	public ApiResponse<Long> recommendOneArticle(@PathVariable String articleId) {
-		long recommendResult = this.articleService.recommendOneArticle(articleId);
-		return ApiResponse.OK(recommendResult);
+		try {
+			return ApiResponse.OK(this.articleService.recommendOneArticle(articleId));
+		} catch (Exception e) {
+			return ApiResponse.ERROR(e.getMessage());
+		}
 	}
 }
 

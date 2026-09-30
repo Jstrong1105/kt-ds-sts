@@ -1,0 +1,67 @@
+package com.ktdsuniversity.edu.replies.service;
+
+import org.springframework.stereotype.Service;
+
+import com.ktdsuniversity.edu.files.components.MultipartHandler;
+import com.ktdsuniversity.edu.replies.dao.RepliesDao;
+import com.ktdsuniversity.edu.replies.vo.request.ModifyReplieVO;
+import com.ktdsuniversity.edu.replies.vo.request.RegistReplieVO;
+import com.ktdsuniversity.edu.replies.vo.response.ReplieListVO;
+import com.ktdsuniversity.edu.replies.vo.response.RepliesVO;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class RepliesServiceImpl implements RepliesService {
+
+	private RepliesDao repliesDao;
+	private MultipartHandler multipartHandler;
+	
+	@Override
+	public ReplieListVO readAllReplies(String articleId) {
+		ReplieListVO replieListVO = new ReplieListVO();
+		
+		long count = this.repliesDao.selectReplieCount(articleId);
+		
+		if (count != 0) {
+			replieListVO.setReplieCount(count);
+			replieListVO.setReplieList(this.repliesDao.selectAllReplies(articleId));
+		}
+		
+		return replieListVO;
+	}
+	
+	@Override
+	public RepliesVO createNewReplie(RegistReplieVO registReplieVO) {
+		
+		if (registReplieVO.getFile() != null) {
+			String fileSetId = this.multipartHandler.storeFiles(registReplieVO.getFile(), registReplieVO.getEmail());
+			registReplieVO.setFileSetId(fileSetId);
+		}
+		
+		this.repliesDao.insertNewReplie(registReplieVO);
+		
+		return this.repliesDao.selectReplieByReplieId(registReplieVO.getId());
+	}
+	
+	@Override
+	public RepliesVO updateReplie(String replieId, ModifyReplieVO modifyReplieVO) {
+		
+		modifyReplieVO.setId(replieId);
+		
+		int result = this.repliesDao.updateReplie(modifyReplieVO);
+		
+		throw new IllegalArgumentException("존재하지 않는 댓글입니다.");
+	}
+	
+	@Override
+	public String deleteReplie(String replieId) {
+		return null;
+	}
+	
+	@Override
+	public long recommendOneReplie(String replieId) {
+		return 0;
+	}
+}

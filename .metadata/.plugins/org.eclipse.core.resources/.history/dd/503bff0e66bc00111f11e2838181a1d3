@@ -1,0 +1,26 @@
+package com.ktdsuniversity.edu.files.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.ktdsuniversity.edu.files.vo.request.RequestFileSetVO;
+import com.ktdsuniversity.edu.files.vo.request.RequestFileVO;
+import com.ktdsuniversity.edu.files.vo.response.FilesVO;
+
+@Mapper
+public interface FilesDao {
+	
+	int insertNewFileSet(RequestFileSetVO requestFileSetVO);
+
+	int insertNewFile(RequestFileVO requestFileVO);
+	
+	/* int deleteFilesByArticleId(@Param("articleId")String articleId); */
+	
+	int deleteFilesByFileSetId(@Param("fileSetId")String fileSetId);
+	
+	int deleteFileByFileId(@Param("fileId")String fileId);
+	
+	List<FilesVO> selectFilesByFileSetId(@Param("fileSetId")String fileSetId)
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ktdsuniversity.edu.files.dao.FilesDao">
+    
+    <!-- int insertNewFileSet(RequestFileSetVO requestFileSetVO); -->
+    <insert id="insertNewFileSet" parameterType="com.ktdsuniversity.edu.files.vo.request.RequestFileSetVO">
+    
+        <selectKey order="BEFORE" keyColumn="id" resultType="string">
+            
+            SELECT 'FS-' || TO_CHAR(SYSDATE, 'YYYYMMDD-') || LPAD(SEQ_FILE_SET_PK.NEXTVAL,6,'0') 
+              FROM DUAL
+            
+        </selectKey>
+    
+        INSERT INTO FILE_SET 
+		( ID
+		, EMAIL
+		, CRT_DT
+		, MDFY_DT
+		) VALUES
+		( #{id}
+		, #{email}
+		, SYSDATE
+		, NULL
+		)
+    </insert>
+    
+    <!-- int insertNewFile(RequestFileVO requestFileVO); -->
+    <insert id="insertNewFile" parameterType="com.ktdsuniversity.edu.files.vo.request.RequestFileVO">
+        INSERT INTO FILES 
+		( ID
+		, FILE_SET_ID
+		, DISPLAY_FILE_NAME
+		, OBFUSCATE_FILE_NAME
+		, FILE_SIZE
+		) VALUES
+		( 'ID'
+		, 'FS-20260929-000002'
+		, '표시될 파일명'
+		, '암호화된 파일명'
+		, 100
+		)
+    </insert>
+    
+</mapper>

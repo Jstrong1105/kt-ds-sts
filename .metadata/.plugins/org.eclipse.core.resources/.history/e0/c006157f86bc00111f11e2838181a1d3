@@ -1,0 +1,24 @@
+package com.ktdsuniversity.edu.replies.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.ktdsuniversity.edu.replies.vo.request.ModifyReplieVO;
+import com.ktdsuniversity.edu.replies.vo.request.RegistReplieVO;
+import com.ktdsuniversity.edu.replies.vo.response.RepliesVO;
+
+public interface RepliesDao {
+	
+	long selectReplieCount(@Param("articleId") String articleId);
+	
+	List<RepliesVO> selectAllReplies(@Param("articleId") String articleId);
+	
+	int insertNewReplie(RegistReplieVO registReplieVO);
+	
+	int updateReplie(ModifyReplieVO modifyReplieVO);
+	
+	int deleteReplie(@Param("replieId") String replieId);
+	
+	int updateIncreaseRecommendCount(@Param("replieId") String replieId);
+}

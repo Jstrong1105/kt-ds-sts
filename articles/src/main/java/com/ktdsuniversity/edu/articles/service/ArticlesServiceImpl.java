@@ -9,6 +9,7 @@ import com.ktdsuniversity.edu.articles.vo.request.ModifyArticleVO;
 import com.ktdsuniversity.edu.articles.vo.request.RegistArticleVO;
 import com.ktdsuniversity.edu.articles.vo.response.ArticleListVO;
 import com.ktdsuniversity.edu.articles.vo.response.ArticlesVO;
+import com.ktdsuniversity.edu.files.components.MultipartHandler;
 
 import lombok.AllArgsConstructor;
 
@@ -17,6 +18,8 @@ import lombok.AllArgsConstructor;
 public class ArticlesServiceImpl implements ArticlesService {
 	
 	private ArticlesDao articleDao;
+	// private FilesDao filesDao;
+	private MultipartHandler multipartHandler;
 	
 //	public ArticlesServiceImpl(ArticlesDao articleDao) {
 //		this.articleDao = articleDao;
@@ -38,6 +41,10 @@ public class ArticlesServiceImpl implements ArticlesService {
 	
 	@Override
 	public ArticlesVO createNewArticle(RegistArticleVO registArticleVO) {
+		
+		String fileSetId = this.multipartHandler.storeFiles(registArticleVO.getFile(), registArticleVO.getEmail());
+		registArticleVO.setFileSetId(fileSetId);
+		
 		int insertRows = this.articleDao.insertNewArticle(registArticleVO);
 		// System.out.println(insertRows + " 개 생성");
 		
@@ -54,6 +61,14 @@ public class ArticlesServiceImpl implements ArticlesService {
 	@Override
 	public ArticlesVO updateArticle(String articleId, ModifyArticleVO modifyArticleVO) {
 		
+		ArticlesVO article = this.articleDao.selectArticleByArticleId(articleId);
+		
+		String fileSetId = this.multipartHandler.storeFiles(modifyArticleVO.getFile()
+									                      , modifyArticleVO.getEmail()
+									                      , article.getFileSetId());
+		
+		modifyArticleVO.setFileSetId(fileSetId);
+		
 		int updateRows = this.articleDao.updateArticle(articleId, modifyArticleVO);
 		
 		if (updateRows == 0) {
@@ -66,10 +81,17 @@ public class ArticlesServiceImpl implements ArticlesService {
 	@Override
 	public String deleteArticle(String articleId) {
 		
+		ArticlesVO article = this.articleDao.selectArticleByArticleId(articleId);
+		
 		int deleteRows = this.articleDao.deleteArticle(articleId);
 		
 		if (deleteRows == 0) {
 			throw new IllegalArgumentException("존재하지 않는 게시글 입니다.");
+		}
+		
+		if (article.getFileSetId() != null) {
+			int deleteCount = this.multipartHandler.deleteFiles(article.getFileSetId());
+			System.out.println(deleteCount + "개의 파일이 삭제되었습니다.");
 		}
 		
 		return articleId;

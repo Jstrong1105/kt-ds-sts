@@ -1,0 +1,10 @@
+package com.ktdsuniversity.edu.replies.vo.response;
+
+import java.util.List;
+
+public class ReplieListVO {
+	
+	private long replieCount;
+	
+	private List<RepliesVO> replieList;
+}

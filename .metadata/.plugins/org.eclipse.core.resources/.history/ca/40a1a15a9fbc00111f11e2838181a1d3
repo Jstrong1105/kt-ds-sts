@@ -1,0 +1,17 @@
+package com.ktdsuniversity.edu.files.service;
+
+import org.springframework.stereotype.Service;
+
+import com.ktdsuniversity.edu.files.dao.FilesDao;
+import com.ktdsuniversity.edu.files.vo.response.FilesVO;
+
+@Service
+public class FilesServiceImpl implements FilesService {
+	
+	private FilesDao filesDao;
+	
+	@Override
+	public FilesVO readAttachFile(String fileSetId, String fileId) {
+		return null;
+	}
+}
